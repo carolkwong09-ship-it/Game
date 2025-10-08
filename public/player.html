@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玩家登入</title>
+</head>
+<body>
+<h2>🎮 Kahoot即時答題遊戲</h2>
+<input id="nameInput" placeholder="輸入暱稱">
+<button onclick="join()">登入</button>
+<hr>
+<p id="question">等待開始...</p>
+<div id="answers"></div>
+<button id="doubleBtn" onclick="useDouble()">🔥 使用雙倍卡</button>
+<p id="status"></p>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+let name;
+
+function join(){
+  name = document.getElementById("nameInput").value.trim();
+  if(!name) return alert("請輸入暱稱");
+  socket.emit("joinGame", name);
+  document.getElementById("status").textContent = `已加入：${name}`;
+}
+
+function useDouble(){
+  socket.emit("useDouble", name);
+  document.getElementById("doubleBtn").disabled = true;
+  document.getElementById("status").textContent = "🔥 這一題分數雙倍！";
+}
+
+function sendAnswer(ans){
+  const correct = (ans === 'A'); //臨時測試
+  socket.emit("answer", { name, correct });
+}
+
+socket.on("doubleActivated", ()=>{
+  document.getElementById("status").textContent = "🔥 雙倍分已啟動！";
+});
+</script>
+</body>
+</html>
