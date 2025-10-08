@@ -1,5 +1,5 @@
 {
-  "name": "kahoot-double-game",
+  "name": "Game",
   "version": "1.0.0",
   "description": "Kahoot style quiz game with double score card",
   "main": "index.js",
