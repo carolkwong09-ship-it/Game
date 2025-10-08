@@ -1,0 +1,13 @@
+{
+  "name": "kahoot-double-game",
+  "version": "1.0.0",
+  "description": "Kahoot style quiz game with double score card",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  }
+}
